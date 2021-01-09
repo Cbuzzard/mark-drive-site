@@ -1,0 +1,8 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)" action="">
+<mat-form-field class="search-bar" appearance="outline">
+    <mat-label>Google Drive Folder Url</mat-label>
+    <input matInput placeholder="https://drive.google.com/drive/u/0/folders/" formControlName="url">
+</mat-form-field>
+</form>
+
+<p>{{duration}}</p>

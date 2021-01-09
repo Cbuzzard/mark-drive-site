@@ -1,0 +1,20 @@
+<div id="container">
+    <p *ngIf="loginStatus" id="name">{{getName()}} </p>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <!-- <mat-icon *ngIf="loginStatus" class="profileicon">account_circle</mat-icon> -->
+        <mat-icon *ngIf="!loginStatus" class="profileicon">login</mat-icon>
+        <img class="profileimage" src="{{getUserImg()}}">
+    </button>    
+</div>
+
+<mat-menu #menu="matMenu">
+    <button *ngIf="!loginStatus" (click)='login()' mat-menu-item>
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+    </button>
+    <button *ngIf="loginStatus" (click)='logout()' mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+    </button>
+</mat-menu>
+

@@ -1,0 +1,26 @@
+#container {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.profileicon {
+    font-size: 30px;
+    margin-right: 20px;
+}
+
+#name {
+    font-size: 16px;
+}
+
+.profileimage {
+    height: 35px;
+    border-radius: 18px;
+    margin-left: 8px;
+}
+
+@media only screen and (max-width: 450px) {
+    #name {
+      display: none;
+    }
+  }
