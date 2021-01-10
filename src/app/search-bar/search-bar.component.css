@@ -1,5 +1,21 @@
 .search-bar {
+    width: 100%;
+    min-width: 350px;
+    max-width: 700px;
+}
+
+.total-time {
+    font-size: 30px;
+}
+
+.check-box-wrapper {
+    width: 100%;
+    text-align: left;
+}
+
+.search-bar-wrapper {
     width: 50%;
     min-width: 350px;
     max-width: 700px;
+    margin: 0 auto 0 auto;
 }

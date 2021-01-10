@@ -45,13 +45,13 @@ export class UserService {
     });
   }
 
-  async getTotalTime(url: string): Promise<string> {
+  async getTotalTime(url: string, includeSubFolders: boolean): Promise<number> {
     let folderId = this.parseUrlToFolderId(url);
     let component = this;
     return await gapi.client.drive.files.list({
       'q': `'${folderId}' in parents`,
       'fields': 'files(id, name, mimeType, videoMediaMetadata)',
-    }).then(function (response) {
+    }).then(async function (response) {
       var files = response.result.files;
       if (files && files.length > 0) {
         let totalmillis = 0;
@@ -59,9 +59,11 @@ export class UserService {
           if (file.videoMediaMetadata) {
             totalmillis = totalmillis + parseInt(file.videoMediaMetadata.durationMillis);
           }
+          if (includeSubFolders && file.mimeType === 'application/vnd.google-apps.folder') {
+            totalmillis = totalmillis + await component.getTotalTime(`folders/${file.id}`, includeSubFolders);
+          }
         }
-        console.log(totalmillis)
-        return component.msToTime(totalmillis);
+        return totalmillis;
       } else {
         alert("NO FILES FOUND OR INVALID PERMISSION")
       }
@@ -83,17 +85,7 @@ export class UserService {
     return null;
   }
 
-  msToTime(duration: any) {
-    let seconds: any = Math.floor((duration / 1000) % 60);
-    let minutes: any = Math.floor((duration / (1000 * 60)) % 60);
-    let hours: any = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-    return hours + ":" + minutes + ":" + seconds;
-  }
+  
 
 
 }
