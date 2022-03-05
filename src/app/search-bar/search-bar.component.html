@@ -13,3 +13,11 @@
 
 
 <p class="total-time">{{duration}}</p>
+
+<ul class="no-meta" *ngIf="noMetaFiles">
+    <p>The following is a list of files that have no meta data. This may be because the file has yet to be loaded by google. Click the button below to initiate a force load of these files.Wait for all of them to load and then search again. Make sure popups are allowed for this site.</p>
+    <li *ngFor="let file of noMetaFiles">
+        {{ file.name }}
+    </li>
+    <button mat-raised-button color="primary" (click)="forceLoad()">Force Load</button>
+</ul>

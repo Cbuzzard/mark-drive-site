@@ -12,6 +12,7 @@ export class SearchBarComponent implements OnInit {
   searchForm: FormGroup;
   duration = "";
   includeSubFolders = true;
+  noMetaFiles;
 
   constructor(private formBuilder: FormBuilder, private user: UserService) {
     this.searchForm = this.formBuilder.group({
@@ -25,6 +26,8 @@ export class SearchBarComponent implements OnInit {
   onSubmit(form) {
     this.user.getTotalTime(form.url, this.includeSubFolders).then((res) => {
       this.duration = this.msToTime(res);
+      this.noMetaFiles = this.user.noMetaFiles;
+
     })
   }
 
@@ -38,6 +41,12 @@ export class SearchBarComponent implements OnInit {
     seconds = (seconds < 10) ? "0" + seconds : seconds;
 
     return hours + ":" + minutes + ":" + seconds;
+  }
+
+  forceLoad() {
+    for (let file of this.noMetaFiles) {
+      let myWin = window.open(`https://drive.google.com/file/d/${file.id}/view`)
+    }
   }
 
 }

@@ -8,6 +8,7 @@ export class UserService {
   gapiSetup: boolean = false;
   authInstance: gapi.auth2.GoogleAuth;
   userId;
+  noMetaFiles = [];
 
   constructor() {
     this.initGoogleAuth();
@@ -46,6 +47,7 @@ export class UserService {
   }
 
   async getTotalTime(url: string, includeSubFolders: boolean): Promise<number> {
+    this.noMetaFiles = []
     let folderId = this.parseUrlToFolderId(url);
     let component = this;
     return await gapi.client.drive.files.list({
@@ -58,6 +60,8 @@ export class UserService {
         for (let file of files) {
           if (file.videoMediaMetadata) {
             totalmillis = totalmillis + parseInt(file.videoMediaMetadata.durationMillis);
+          } else if (file.mimeType !== 'application/vnd.google-apps.folder') {
+            component.noMetaFiles.push(file)
           }
           if (includeSubFolders && file.mimeType === 'application/vnd.google-apps.folder') {
             totalmillis = totalmillis + await component.getTotalTime(`folders/${file.id}`, includeSubFolders);
