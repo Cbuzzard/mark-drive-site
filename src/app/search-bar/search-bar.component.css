@@ -1,7 +1,18 @@
 .search-bar {
-    width: 100%;
     min-width: 350px;
     max-width: 700px;
+    padding: 10px;
+}
+
+.submit-button {
+    margin-top: -20px; /* Adjust this value as needed */
+    position: relative;
+}
+
+.input-wrapper {
+    display: flex; /* Add flexbox to align items horizontally */
+    align-items: center; /* Vertically align items */
+    gap: 10px; /* Add space between input and button */
 }
 
 .total-time {
@@ -17,18 +28,18 @@
     width: 50%;
     min-width: 350px;
     max-width: 700px;
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
 }
 
 .no-meta {
     max-width: 700px;
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
 }
 
 p {
     margin-bottom: 30px;
 }
 
-button {
+.force-button {
     margin-top: 30px;
 }

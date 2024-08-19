@@ -1,10 +1,14 @@
 
 <div class="search-bar-wrapper">
     <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)" action="">
-        <mat-form-field class="search-bar" appearance="outline">
-            <mat-label>Google Drive Folder Url</mat-label>
-            <input matInput placeholder="https://drive.google.com/drive/u/0/folders/" formControlName="url">
-        </mat-form-field>
+        <div class="input-wrapper">
+            <mat-form-field  class="search-bar" appearance="outline">
+                <mat-label>Google Drive Folder Url</mat-label>
+                <input matInput placeholder="https://drive.google.com/drive/u/0/folders/" formControlName="url">
+            </mat-form-field>
+            <button class="submit-button" mat-raised-button color="primary" type="submit">Calculate</button>
+        </div>
+        
         </form>
         <div class="check-box-wrapper">
             <mat-checkbox [(ngModel)]="includeSubFolders">Include Sub Folders</mat-checkbox>
@@ -14,10 +18,10 @@
 
 <p class="total-time">{{duration}}</p>
 
-<ul class="no-meta" *ngIf="noMetaFiles">
+<ul class="no-meta" *ngIf="noMetaFiles.length">
     <p>The following is a list of files that have no meta data. This may be because the file has yet to be loaded by google. Click the button below to initiate a force load of these files.Wait for all of them to load and then search again. Make sure popups are allowed for this site.</p>
     <li *ngFor="let file of noMetaFiles">
         {{ file.name }}
     </li>
-    <button mat-raised-button color="primary" (click)="forceLoad()">Force Load</button>
+    <button class="force-button" mat-raised-button color="primary" (click)="forceLoad()">Force Load</button>
 </ul>

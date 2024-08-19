@@ -12,7 +12,7 @@ export class SearchBarComponent implements OnInit {
   searchForm: FormGroup;
   duration = "";
   includeSubFolders = true;
-  noMetaFiles;
+  noMetaFiles = [];
 
   constructor(private formBuilder: FormBuilder, private user: UserService) {
     this.searchForm = this.formBuilder.group({
@@ -25,6 +25,10 @@ export class SearchBarComponent implements OnInit {
 
   onSubmit(form) {
     this.user.getTotalTime(form.url, this.includeSubFolders).then((res) => {
+      if(res === 0) {
+        alert("NO FILES FOUND OR INVALID PERMISSION")
+        return
+      }
       this.duration = this.msToTime(res);
       this.noMetaFiles = this.user.noMetaFiles;
 

@@ -53,6 +53,8 @@ export class UserService {
     return await gapi.client.drive.files.list({
       'q': `'${folderId}' in parents`,
       'fields': 'files(id, name, mimeType, videoMediaMetadata)',
+      'includeItemsFromAllDrives': true,
+      'supportsAllDrives': true
     }).then(async function (response) {
       var files = response.result.files;
       if (files && files.length > 0) {
@@ -69,7 +71,7 @@ export class UserService {
         }
         return totalmillis;
       } else {
-        alert("NO FILES FOUND OR INVALID PERMISSION")
+        return 0
       }
     });
   }
