@@ -1,18 +1,19 @@
 
 <div class="search-bar-wrapper">
+    <div class="check-box-wrapper">
+        <mat-checkbox color="primary" [(ngModel)]="includeSubFolders">Include Sub Folders</mat-checkbox>
+    </div>
     <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)" action="">
         <div class="input-wrapper">
             <mat-form-field  class="search-bar" appearance="outline">
                 <mat-label>Google Drive Folder Url</mat-label>
                 <input matInput placeholder="https://drive.google.com/drive/u/0/folders/" formControlName="url">
             </mat-form-field>
-            <button class="submit-button" mat-raised-button color="primary" type="submit">Calculate</button>
         </div>
+        <button class="submit-button" mat-raised-button color="primary" type="submit">Calculate</button>
         
         </form>
-        <div class="check-box-wrapper">
-            <mat-checkbox [(ngModel)]="includeSubFolders">Include Sub Folders</mat-checkbox>
-        </div>
+        
 </div>
 
 

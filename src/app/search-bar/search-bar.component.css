@@ -1,12 +1,11 @@
 .search-bar {
     min-width: 350px;
     max-width: 700px;
-    padding: 10px;
+    width: 100%;
 }
 
 .submit-button {
-    margin-top: -20px; /* Adjust this value as needed */
-    position: relative;
+    margin: auto;
 }
 
 .input-wrapper {
